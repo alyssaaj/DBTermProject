@@ -683,5 +683,5 @@ INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) 
 INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1,1,SEQ_P2.CURRVAL,SEQ_P.NEXTVAL,3);
 
 -- test trigger 2
-DELETE FROM PARTICIPANT WHERE participant_id=70;
-DELETE FROM PARTICIPANT WHERE participant_id=99;
+--DELETE FROM PARTICIPANT WHERE participant_id=70;
+--DELETE FROM PARTICIPANT WHERE participant_id=99;
