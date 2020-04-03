@@ -685,3 +685,4 @@ INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) 
 -- test trigger 2
 --DELETE FROM PARTICIPANT WHERE participant_id=70;
 --DELETE FROM PARTICIPANT WHERE participant_id=99;
+

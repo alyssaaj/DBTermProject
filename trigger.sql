@@ -28,8 +28,6 @@ END;
 /
 COMMIT;
 
-
-
 -- ATHLETE_DISMISSAL
 -- enforce business rules and maintained consistency 
 -- This trigger is responsible for deleting all the data of an athlete who was dismissed 
@@ -67,7 +65,7 @@ BEGIN
 
 END;
 /
-
+COMMIT;
 
 -- ENFORCE_CAPACITY
 -- enforce (semantics) integrity constraints
