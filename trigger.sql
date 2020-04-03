@@ -2,7 +2,7 @@
 -- CS 1555 Term Project
 -- trigger.sql (the script to other database objects, e.g., trigger, functions, procedures, etc.)
 
-
+ALTER SESSION SET PLSCOPE_SETTINGS = 'IDENTIFIERS:NONE';
 -- ASSIGN_MEDAL
 -- automatically generate derived column values
 -- This trigger is responsible to assign the appropriate medal based on the position 
@@ -49,17 +49,22 @@ DECLARE
     t_size integer;
 
 BEGIN
-    SELECT team_id into t_id FROM TEAM_MEMBER where participant_id=:new.participant_id;
+    SELECT team_id into t_id FROM TEAM_MEMBER where participant_id=:old.participant_id;
     SELECT sport_id into s_id FROM TEAM where team_id=t_id;
-    SELECT event_id into e_id FROM SCOREBOARD where participant_id=:new.participant_id and team_id=t_id;
+    SELECT event_id into e_id FROM SCOREBOARD where participant_id=:old.participant_id and team_id=t_id;
     
     SELECT team_size into t_size FROM SPORT where sport_id=s_id;
+    
+    DELETE FROM SCOREBOARD WHERE participant_id=:old.participant_id;
+    DELETE FROM TEAM_MEMBER where participant_id=:old.participant_id;
+    
     IF (t_size = 1) THEN 
         DELETE FROM SCOREBOARD WHERE team_id=t_id; -- delete player and coach from scoreboard
-        DELETE FROM TEAM WHERE team_id=t_id; -- delete entire team
+        --DELETE FROM TEAM WHERE team_id=t_id; -- delete entire team Not working yet
     ELSE 
         UPDATE EVENT_PARTICIPATION SET status = 'n' WHERE team_id=t_id;
     END IF;
+
 END;
 /
 
@@ -69,7 +74,6 @@ END;
 -- This trigger should check the maximum possible venue capacity before the event is associated 
 -- with it. In case the capacity is exceeded, an exception should be thrown.
 SET SERVEROUTPUT ON;
-ALTER SESSION SET PLSCOPE_SETTINGS = 'IDENTIFIERS:NONE';
 --DROP MATERIALIZED VIEW EVENTS_AT_VENUE;
 
 CREATE OR REPLACE VIEW EVENTS_AT_VENUE

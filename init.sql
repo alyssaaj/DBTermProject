@@ -24,7 +24,7 @@ INSERT INTO USER_ROLE values(SEQ_USER_ROLE.NEXTVAL,'Guest');
 COMMIT;
 
 -- USER ACCOUNT
---INSERT INTO USER_ACCOUNT values();
+INSERT INTO USER_ACCOUNT (user_id) values(1);
 
 -- OLUMPICS DONE
 CREATE SEQUENCE SEQ_OLYMPICS START WITH 1 INCREMENT BY 1;
@@ -635,9 +635,9 @@ INSERT INTO EVENT_PARTICIPATION values(SEQ_EVENT_PART.CURRVAL, SEQ_EVENT_PART2.N
 --INSERT INTO SCOREBOARD values();
 
 -- 400 m athens
-INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 61, 70, 1, 1);
-INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 62, 71, 1, 2);
-INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 63, 72, 1, 3);
+INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 61, 70, 1);
+INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 62, 71, 1);
+INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 63, 72, 1);
 
 DROP SEQUENCE SEQ_P;
 CREATE SEQUENCE SEQ_P START WITH 99 INCREMENT BY 1;
@@ -682,6 +682,6 @@ INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) 
 INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1,1,SEQ_P2.CURRVAL,SEQ_P.NEXTVAL,3);
 INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1,1,SEQ_P2.CURRVAL,SEQ_P.NEXTVAL,3);
 
-
---DELETE FROM PARTICIPANT WHERE participant_id=70;
---DELETE FROM PARTICIPANT WHERE participant_id=99;
+-- test trigger 2
+DELETE FROM PARTICIPANT WHERE participant_id=70;
+DELETE FROM PARTICIPANT WHERE participant_id=99;
