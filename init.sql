@@ -15,6 +15,7 @@ DROP SEQUENCE SEQ_VENUE;
 DROP SEQUENCE SEQ_EVENT;
 DROP SEQUENCE SEQ_TM_TEAM;
 DROP SEQUENCE SEQ_TM_PART;
+DROP SEQUENCE SEQ_USER_ACCOUNT;
 
 -- USER_ROLE DONE
 CREATE SEQUENCE SEQ_USER_ROLE START WITH 1 INCREMENT BY 1;
@@ -24,14 +25,18 @@ INSERT INTO USER_ROLE values(SEQ_USER_ROLE.NEXTVAL,'Guest');
 COMMIT;
 
 -- USER ACCOUNT
-INSERT INTO USER_ACCOUNT (user_id) values(1);
-
+CREATE SEQUENCE SEQ_USER_ACCOUNT START WITH 1 INCREMENT BY 1;
+INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'o1', 'pass', 1, sysdate);
+INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'o2', 'pass', 1, sysdate);
+INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'c1', 'pass', 2, sysdate);
+INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'c2', 'pass', 2, sysdate);
+INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'g1', 'GUEST', 3, sysdate);
 -- OLUMPICS DONE
 CREATE SEQUENCE SEQ_OLYMPICS START WITH 1 INCREMENT BY 1;
 INSERT INTO OLYMPICS values(SEQ_OLYMPICS.NEXTVAL, 'XXV', 'Athens', '13-AUG-2004', '29-AUG-2004', 'https://www.olympic.org/athens-2004');
 INSERT INTO OLYMPICS values(SEQ_OLYMPICS.NEXTVAL, 'XXVI', 'Beijing', '08-AUG-2008', '24-AUG-2008', 'https://www.olympic.org/beijing-2008');
-INSERT INTO OLYMPICS values(SEQ_OLYMPICS.NEXTVAL, 'XXVII','LONDON', '27-JUL-2012', '12-AUG-2012', 'https://www.olympic.org/london-2012');
-INSERT INTO OLYMPICS values(SEQ_OLYMPICS.NEXTVAL, 'XXVIII', 'RIO', '05-AUG-2016', '21-AUG-2016', 'https://www.olympic.org/rio-2016');
+INSERT INTO OLYMPICS values(SEQ_OLYMPICS.NEXTVAL, 'XXVII','London', '27-JUL-2012', '12-AUG-2012', 'https://www.olympic.org/london-2012');
+INSERT INTO OLYMPICS values(SEQ_OLYMPICS.NEXTVAL, 'XXVIII', 'Rio', '05-AUG-2016', '21-AUG-2016', 'https://www.olympic.org/rio-2016');
 COMMIT;
 
 -- SPORT DONE
@@ -59,70 +64,70 @@ INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Yang', 'Ping', 'Chinese
 INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Zoran', 'Terzic', 'Serbian', 'Belgrade', '09-AUG-1966');
 INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Karch', 'Kiraly', 'American', 'Jackson, MI', '03-NOV-1960');
 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'Athens Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Spain Men', 'Athens Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Switzerland Men', 'Athens Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Men', 'Beijing Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'Beijing Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'Beijing Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Germany Men', 'London Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'London Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Latvia Men', 'London Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'Rio Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Italy Men', 'Rio Beach Vball');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Netherlands Men', 'Rio Beach Vball');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'Athens Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Spain Men', 'Athens Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Switzerland Men', 'Athens Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Men', 'Beijing Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'Beijing Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'Beijing Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Germany Men', 'London Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'London Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Latvia Men', 'London Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Brazil Men', 'Rio Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Italy Men', 'Rio Beach Vball', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Netherlands Men', 'Rio Beach Vball', 'n', 'bp', '12-APR-2020');
 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women', 'Athens Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Japan Women', 'Athens Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Athens Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women', 'Beijing Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Spain Women', 'Beijing Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Japan Women', 'Beijing Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women', 'London Duet Syn Swim'); 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Spain Women', 'London Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'China Women', 'London Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women', 'Rio Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'China Women', 'Rio Duet Syn Swim');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Japan Women', 'Rio Duet Syn Swim');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women', 'Athens Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Japan Women', 'Athens Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Athens Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women', 'Beijing Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Spain Women', 'Beijing Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Japan Women', 'Beijing Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women', 'London Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Spain Women', 'London Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'China Women', 'London Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women', 'Rio Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'China Women', 'Rio Duet Syn Swim', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Japan Women', 'Rio Duet Syn Swim', 'n', 'bp', '12-APR-2020');
 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Chile Mens', 'Athens Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Mens', 'Athens Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Chile Mens', 'Athens Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Spain Mens', 'Beijing Singles Team'); 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Chile Mens', 'Beijing Singles Team'); 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Serbia Mens', 'Beijing Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Great Britain Mens', 'London Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Switzerland Mens', 'London Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Argentina Mens', 'London Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Great Gritain Mens', 'Rio Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Argentina Mens', 'Rio Singles Team');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Japan Mens', 'Rio Singles Team');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Chile Mens', 'Athens Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Mens', 'Athens Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Chile Mens', 'Athens Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Spain Mens', 'Beijing Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Chile Mens', 'Beijing Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Serbia Mens', 'Beijing Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Great Britain Mens', 'London Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Switzerland Mens', 'London Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Argentina Mens', 'London Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Great Gritain Mens', 'Rio Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Argentina Mens', 'Rio Singles Team', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Japan Mens', 'Rio Singles Team', 'n', 'bp', '12-APR-2020');
 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Athens 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Ukraine Women', 'Athens 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Athens 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Beijing 100 M Hurdles'); 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Australia Women', 'Beijing 100 M Hurdles'); 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Canada Women', 'Beijing 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Australia Women', 'London 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'London 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'London 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 100 M Hurdles');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 100 M Hurdles');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Athens 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Ukraine Women', 'Athens 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Athens 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Beijing 100 M Hurdles', 'n', 'bp', '12-APR-2020'); 
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Australia Women', 'Beijing 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Canada Women', 'Beijing 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Australia Women', 'London 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'London 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'London 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 100 M Hurdles', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 100 M Hurdles', 'n', 'bp', '12-APR-2020');
 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Bahamas Women','Athens 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Mexico Women','Athens 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women','Athens 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Great Britain Women','Beijing 400 M Dash'); 
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Jamaica Women','Beijing 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women','Beijing 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women','London 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Great Britain Women','London 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women','London 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'Denmark Women', 'Rio 400 M Dash');
-INSERT INTO PARTICIPANT (participant_id, fname, lname) values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 400 M Dash');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Bahamas Women','Athens 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Mexico Women','Athens 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Russia Women','Athens 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Great Britain Women','Beijing 400 M Dash', 'n', 'bp', '12-APR-2020'); 
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Jamaica Women','Beijing 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women','Beijing 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women','London 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Great Britain Women','London 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women','London 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'Denmark Women', 'Rio 400 M Dash', 'n', 'bp', '12-APR-2020');
+INSERT INTO PARTICIPANT values(SEQ_PARTICIPANT.NEXTVAL, 'USA Women', 'Rio 400 M Dash', 'n', 'bp', '12-APR-2020');
 
 
 -- 400 M WOMEN
@@ -546,7 +551,7 @@ COMMIT;
 -- VENUE DONE 
 --INSERT INTO VENUE values(venue_id, olympic_id, venue_name, capacity);
 CREATE SEQUENCE SEQ_VENUE START WITH 1 INCREMENT BY 1;
-INSERT INTO VENUE values(SEQ_VENUE.NEXTVAL, 1, 'Peace and Friendship Stadium', 1); -- Womens Vball
+INSERT INTO VENUE values(SEQ_VENUE.NEXTVAL, 1, 'Peace and Friendship Stadium', 2); -- Womens Vball
 INSERT INTO VENUE values(SEQ_VENUE.NEXTVAL, 1, 'Faliro Coastal Zone Olymp Comp', 1); --Men's Beach
 INSERT INTO VENUE values(SEQ_VENUE.NEXTVAL, 1, 'Athens Olympic Aquatic Centre', 1); --Swimming
 INSERT INTO VENUE values(SEQ_VENUE.NEXTVAL, 1, 'Athens Olympic Tennis Centre', 1); --Tennis
@@ -618,6 +623,7 @@ CREATE SEQUENCE SEQ_EVENT_PART2 START WITH 61 INCREMENT BY 1;
 INSERT INTO EVENT_PARTICIPATION values(SEQ_EVENT_PART.NEXTVAL, SEQ_EVENT_PART2.NEXTVAL, 'e');
 INSERT INTO EVENT_PARTICIPATION values(SEQ_EVENT_PART.CURRVAL, SEQ_EVENT_PART2.NEXTVAL, 'e');
 INSERT INTO EVENT_PARTICIPATION values(SEQ_EVENT_PART.CURRVAL, SEQ_EVENT_PART2.NEXTVAL, 'e');
+--INSERT INTO EVENT_PARTICIPATION values(22, 61, 'e');
 
 INSERT INTO EVENT_PARTICIPATION values(SEQ_EVENT_PART.NEXTVAL, SEQ_EVENT_PART2.NEXTVAL, 'e');
 INSERT INTO EVENT_PARTICIPATION values(SEQ_EVENT_PART.CURRVAL, SEQ_EVENT_PART2.NEXTVAL, 'e');
@@ -636,8 +642,13 @@ INSERT INTO EVENT_PARTICIPATION values(SEQ_EVENT_PART.CURRVAL, SEQ_EVENT_PART2.N
 
 -- 400 m athens
 INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 61, 70, 1);
-INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 62, 71, 1);
-INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 63, 72, 1);
+INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 62, 71, 2);
+INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 21, 63, 72, 3);
+--INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1, 22, 61, 70, 1);
+
+INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(2, 22, 64, 73, 1);
+INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(2, 22, 65, 74, 2);
+INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(2, 22, 66, 75, 3);
 
 DROP SEQUENCE SEQ_P;
 CREATE SEQUENCE SEQ_P START WITH 99 INCREMENT BY 1;
@@ -682,7 +693,15 @@ INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) 
 INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1,1,SEQ_P2.CURRVAL,SEQ_P.NEXTVAL,3);
 INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(1,1,SEQ_P2.CURRVAL,SEQ_P.NEXTVAL,3);
 
+--INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(2,1,SEQ_P2.CURRVAL,SEQ_P.NEXTVAL,1);
+--INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(2,1,SEQ_P2.CURRVAL,SEQ_P.NEXTVAL,3);
+--INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(4,1,SEQ_P2.CURRVAL,SEQ_P.NEXTVAL,3);
+--INSERT INTO SCOREBOARD(olympic_id, event_id, team_id, participant_id, position) values(3,1,SEQ_P2.CURRVAL,70,5);
+
+
 -- test trigger 2
 --DELETE FROM PARTICIPANT WHERE participant_id=70;
 --DELETE FROM PARTICIPANT WHERE participant_id=99;
 
+
+COMMIT;
