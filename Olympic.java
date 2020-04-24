@@ -11,15 +11,17 @@ import java.io.*;
 import java.sql.*;
 import java.sql.Date;
 
+
 public class Olympic
 {
-	private static boolean loggedIn;
-	private static String currentUser;
-	private static int currentRole;
-	private static boolean cont = true;
+	public static boolean loggedIn;
+	public static String currentUser;
+	public static int currentRole;
+	public static boolean cont = true;
 	private static final String username = "alj81";
     private static final String password = "4130619";
     private static final String url = "jdbc:oracle:thin:@class3.cs.pitt.edu:1521:dbclass";
+
 
 
 	public static void main(String[] args) throws SQLException {
@@ -35,6 +37,8 @@ public class Olympic
                     "Error connecting to database. Printing stack trace: ");
             e.printStackTrace();
         }
+
+        Olympic o = new Olympic();
 
         do{
         	do{
@@ -62,15 +66,15 @@ public class Olympic
 						String input1 = console_input.next();
 						System.out.print("Enter password: ");
 						String input2 = console_input.next();
-			    		login(connection, input1, input2);
+			    		o.login(connection, input1, input2);
 			    		break;
 			    	case 2:
-			    		exit();
+			    		o.exit();
 			    		break;
 			    }
 			}while(!loggedIn);
 
-			getRole(connection, currentUser);
+			o.getRole(connection, currentUser);
 
 		    
 		    Scanner scanner = new Scanner(System.in);
@@ -121,12 +125,12 @@ public class Olympic
 									passkey = scanner.next();
 								}
 
-			    				createUser(connection, user, passkey, role_id);
+			    				o.createUser(connection, user, passkey, role_id);
 			    				break;
 			    			case 2:
 								System.out.print("Enter the username of the user you would like to drop: ");
 								user = scanner.next();
-			    				dropUser(connection, user);
+			    				o.dropUser(connection, user);
 			    				break;
 			    			case 3:
 			    				System.out.print("Enter the sport ID: ");
@@ -138,7 +142,7 @@ public class Olympic
 			    				System.out.print("Enter the gender: ");
 			    				gender = scanner.next().charAt(0);
 
-			    				createEvent(connection, sport_id, venue_id, event_time, gender);
+			    				o.createEvent(connection, sport_id, venue_id, event_time, gender);
 			    				break;
 			    			case 4:
 			    				System.out.print("Enter the Olympic game city: ");
@@ -153,12 +157,12 @@ public class Olympic
 			    				participant_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the position: ");
 			    				position = Integer.valueOf(scanner.next());
-			    				addEventOutcome(connection, olympic_city, olympic_year, team_id, event_id, participant_id, position);
+			    				o.addEventOutcome(connection, olympic_city, olympic_year, team_id, event_id, participant_id, position);
 			    				break;
 			    			case 5:
 			    				System.out.print("Enter the sport name: ");
 			    				sport_name = scanner.next();
-			    				displaySport(connection, sport_name);
+			    				o.displaySport(connection, sport_name);
 			    				break;
 			    			case 6:
 			    				System.out.print("Enter the Olympic game city: ");
@@ -167,19 +171,19 @@ public class Olympic
 			    				olympic_year = scanner.next();
 			    				System.out.print("Enter the event id: ");
 			    				event_id = Integer.valueOf(scanner.next());
-			    				displayEvent(connection, olympic_city, olympic_year, event_id);
+			    				o.displayEvent(connection, olympic_city, olympic_year, event_id);
 			    				break;
 			    			case 7:
 			    				System.out.print("Enter the Olympic ID: ");
 			    				olympic_id = Integer.valueOf(scanner.next());
-			    				countryRanking(connection, olympic_id);
+			    				o.countryRanking(connection, olympic_id);
 			    				break;
 			    			case 8:
 			    				System.out.print("Enter the Olympic ID: ");
 			    				olympic_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the number of top athletes you would like: ");
 			    				k = Integer.valueOf(scanner.next());
-			    				topkAthletes(connection, olympic_id, k);
+			    				o.topkAthletes(connection, olympic_id, k);
 			    				break;
 			    			case 9:
 			    				System.out.print("Enter participant_id for athlete: ");
@@ -188,10 +192,10 @@ public class Olympic
 			    				olympic_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the number of games: ");
 			    				n = Integer.valueOf(scanner.next());
-			    				connectedAthletes(connection, participant_id, olympic_id, n); 
+			    				o.connectedAthletes(connection, participant_id, olympic_id, n); 
 			    				break;
 			    			case 10:
-			    				logout(connection);
+			    				o.logout(connection);
 			    				break;
 
 			    		}
@@ -235,14 +239,14 @@ public class Olympic
 			    				team_name = scanner.next();
 			    				System.out.print("Enter the coach ID: ");
 			    				coach_id = Integer.valueOf(scanner.next());
-			    				createTeam(connection, olympic_city, olympic_year, sport_id, country_id, team_name, coach_id);
+			    				o.createTeam(connection, olympic_city, olympic_year, sport_id, country_id, team_name, coach_id);
 			    				break;
 			    			case 2:
 			    				System.out.print("Enter the team ID: ");
 			    				team_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the event ID: ");
 			    				event_id = Integer.valueOf(scanner.next());
-			    				registerTeam(connection, team_id, event_id);
+			    				o.registerTeam(connection, team_id, event_id);
 			    				break;
 			    			case 3:
 			    				System.out.print("Enter the participant's first name: ");
@@ -255,24 +259,24 @@ public class Olympic
 			    				birth_place = scanner.next();
 			    				System.out.print("Enter the participant's dob: ");
 			    				dob = Date.valueOf(scanner.next());
-			    				addParticipant(connection, fname, lname, nationality, birth_place, dob);
+			    				o.addParticipant(connection, fname, lname, nationality, birth_place, dob);
 			    				break;
 			    			case 4:
 			    				System.out.print("Enter the team ID: ");
 			    				team_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the participant ID:");
 			    				participant_id = Integer.valueOf(scanner.next());
-			    				addTeamMember(connection, team_id, participant_id);
+			    				o.addTeamMember(connection, team_id, participant_id);
 			    				break;
 			    			case 5:
 			    				System.out.print("Enter the participant ID of the athlete you want to remove: ");
 			    				participant_id = Integer.valueOf(scanner.next());
-			    				dropTeamMember(connection, participant_id);
+			    				o.dropTeamMember(connection, participant_id);
 			    				break;
 			    			case 6:
 			    				System.out.print("Enter the sport name: ");
 			    				sport_name = scanner.next();
-			    				displaySport(connection, sport_name);
+			    				o.displaySport(connection, sport_name);
 			    				break;
 			    			case 7:
 			    				System.out.print("Enter the Olympic game city: ");
@@ -281,19 +285,19 @@ public class Olympic
 			    				olympic_year = scanner.next();
 			    				System.out.print("Enter the event id: ");
 			    				event_id = Integer.valueOf(scanner.next());
-			    				displayEvent(connection, olympic_city, olympic_year, event_id);
+			    				o.displayEvent(connection, olympic_city, olympic_year, event_id);
 			    				break;
 			    			case 8:
 			    				System.out.print("Enter the Olympic ID: ");
 			    				olympic_id = Integer.valueOf(scanner.next());
-			    				countryRanking(connection, olympic_id);
+			    				o.countryRanking(connection, olympic_id);
 			    				break;
 			    			case 9:
 			    				System.out.print("Enter the Olympic ID: ");
 			    				olympic_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the number of top athletes you would like: ");
 			    				k = Integer.valueOf(scanner.next());
-			    				topkAthletes(connection, olympic_id, k);
+			    				o.topkAthletes(connection, olympic_id, k);
 			    				break;
 			    			case 10:
 			    				System.out.print("Enter participant_id for athlete: ");
@@ -302,10 +306,10 @@ public class Olympic
 			    				olympic_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the number of games: ");
 			    				n = Integer.valueOf(scanner.next());
-			    				connectedAthletes(connection, participant_id, olympic_id, n); 
+			    				o.connectedAthletes(connection, participant_id, olympic_id, n); 
 			    				break;
 			    			case 11:
-			    				logout(connection);
+			    				o.logout(connection);
 			    				break;
 
 			    		}
@@ -334,7 +338,7 @@ public class Olympic
 			    			case 1:
 			    				System.out.print("Enter the sport name: ");
 			    				sport_name = scanner.next();
-			    				displaySport(connection, sport_name);
+			    				o.displaySport(connection, sport_name);
 			    				break;
 			    			case 2:
 			    				System.out.print("Enter the Olympic game city: ");
@@ -343,18 +347,18 @@ public class Olympic
 			    				olympic_year = scanner.next();
 			    				System.out.print("Enter the event id: ");
 			    				event_id = Integer.valueOf(scanner.next());
-			    				displayEvent(connection, olympic_city, olympic_year, event_id);
+			    				o.displayEvent(connection, olympic_city, olympic_year, event_id);
 			    			case 3:
 			    				System.out.print("Enter the Olympic ID: ");
 			    				olympic_id = Integer.valueOf(scanner.next());
-			    				countryRanking(connection, olympic_id);
+			    				o.countryRanking(connection, olympic_id);
 			    				break;
 			    			case 4:
 			    				System.out.print("Enter the Olympic ID: ");
 			    				olympic_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the number of top athletes you would like: ");
 			    				k = Integer.valueOf(scanner.next());
-			    				topkAthletes(connection, olympic_id, k);
+			    				o.topkAthletes(connection, olympic_id, k);
 			    				break;
 			    			case 5:
 			    				System.out.print("Enter participant_id for athlete: ");
@@ -363,10 +367,10 @@ public class Olympic
 			    				olympic_id = Integer.valueOf(scanner.next());
 			    				System.out.print("Enter the number of games: ");
 			    				n = Integer.valueOf(scanner.next());
-			    				connectedAthletes(connection, participant_id, olympic_id, n); 
+			    				o.connectedAthletes(connection, participant_id, olympic_id, n); 
 			    				break;
 			    			case 6:
-			    				logout(connection);
+			    				o.logout(connection);
 			    				break;
 			    		}
 			    		break;
@@ -377,7 +381,7 @@ public class Olympic
 	    } while(cont);
 	}
 
-	public static void getRole(Connection connection, String user){
+	public void getRole(Connection connection, String user){
 		try {
             connection.setAutoCommit(false);
             PreparedStatement stmt = connection.prepareStatement("SELECT role_id FROM USER_ACCOUNT WHERE username=?"); 
@@ -399,7 +403,7 @@ public class Olympic
 	}
 
 // Organizer
-	public static void createUser(Connection connection, String user, String passkey, int role_id){
+	public void createUser(Connection connection, String user, String passkey, int role_id){
 	// Works	
 		try {
 			connection.setAutoCommit(false);
@@ -421,7 +425,7 @@ public class Olympic
 	}
 
 
-	public static void dropUser(Connection connection, String user){
+	public void dropUser(Connection connection, String user){
 	// Works
         try {
             connection.setAutoCommit(false);
@@ -437,13 +441,13 @@ public class Olympic
             }
         }
 
-        if (currentUser.equals(username)){
+        if (currentUser != null && currentUser.equals(username)){
         	logout(connection);
         }
 
 	}
 
-	public static void createEvent(Connection connection, int sport_id, int venue_id, Date event_time, char gender){
+	public void createEvent(Connection connection, int sport_id, int venue_id, Date event_time, char gender){
 	// Works
 		try {
             connection.setAutoCommit(false);
@@ -465,7 +469,7 @@ public class Olympic
 
 	}
 
-	public static void addEventOutcome(Connection connection, String olympic_city, String olympic_year, int team_id, int event_id, int participant_id, int position){
+	public void addEventOutcome(Connection connection, String olympic_city, String olympic_year, int team_id, int event_id, int participant_id, int position){
 	// WORKS 
 		try {
             connection.setAutoCommit(false);
@@ -475,7 +479,7 @@ public class Olympic
             ResultSet res1 = stmt.executeQuery();
             res1.next();
             int olympic_id = res1.getInt("olympic_id");
-            System.out.println(olympic_id);
+            //System.out.println(olympic_id);
 
             stmt = connection.prepareStatement("INSERT INTO SCOREBOARD (olympic_id, event_id, team_id, participant_id, position) VALUES (?, ?, ?, ?, ?)");
             stmt.setInt(1, olympic_id);
@@ -497,7 +501,7 @@ public class Olympic
 	}
 
 // Coach
-	public static void createTeam(Connection connection, String olympic_city, String olympic_year, int sport_id, int country_id, String team_name, int coach_id){
+	public void createTeam(Connection connection, String olympic_city, String olympic_year, int sport_id, int country_id, String team_name, int coach_id){
 	// WORKS 
 		try {
             connection.setAutoCommit(false);
@@ -507,7 +511,7 @@ public class Olympic
             ResultSet res1 = stmt.executeQuery();
             res1.next();
             int olympic_id = res1.getInt("olympic_id");
-            System.out.println(olympic_id);
+            //System.out.println(olympic_id);
 
             stmt = connection.prepareStatement("INSERT INTO TEAM (team_id, olympic_id, team_name, country_id, sport_id, coach_id) VALUES (SEQ_TEAM.NEXTVAL, ?, ?, ?, ?, ?)");
             stmt.setInt(1, olympic_id);
@@ -527,7 +531,7 @@ public class Olympic
         }
 	}
 
-	public static void registerTeam(Connection connection, int team_id, int event_id){
+	public void registerTeam(Connection connection, int team_id, int event_id){
 	// Works	
 		try {
 			connection.setAutoCommit(false);
@@ -547,7 +551,7 @@ public class Olympic
 
 	}
 
-	public static void addParticipant(Connection connection, String fname, String lname, String nationality, String birth_place, Date dob){
+	public void addParticipant(Connection connection, String fname, String lname, String nationality, String birth_place, Date dob){
 	// Works
 		try {
 			connection.setAutoCommit(false);
@@ -569,7 +573,7 @@ public class Olympic
 	    }
 	}
 
-	public static void addTeamMember(Connection connection, int team_id, int participant_id){
+	public void addTeamMember(Connection connection, int team_id, int participant_id){
 	// WORKS 	
 		try {
 			connection.setAutoCommit(false);
@@ -589,7 +593,7 @@ public class Olympic
 
 	}
 
-	public static void dropTeamMember(Connection connection, int participant_id){
+	public void dropTeamMember(Connection connection, int participant_id){
 	// WORKS 
 		try {
             connection.setAutoCommit(false);
@@ -608,7 +612,7 @@ public class Olympic
 	}
 
 // ALL
-	public static void login(Connection connection, String username, String passkey){
+	public void login(Connection connection, String username, String passkey){
 	// Works
 		try{
 			connection.setAutoCommit(false);
@@ -632,7 +636,7 @@ public class Olympic
 	    }
 	}
 
-	public static void displaySport(Connection connection, String sport_name){
+	public void displaySport(Connection connection, String sport_name){
 	// WORKS 
 		// display the:
 			// olympic year it was added SPORTS dob
@@ -693,7 +697,7 @@ public class Olympic
 
 	}
 
-	public static void displayEvent(Connection connection, String olympic_city, String olympic_year, int event_id){
+	public void displayEvent(Connection connection, String olympic_city, String olympic_year, int event_id){
 	// WORKs 
 		// olympic game
 		// event name (sport_name + event_id)
@@ -745,7 +749,7 @@ public class Olympic
 
 	}
 
-	public static void countryRanking(Connection connection, int olympic_id){
+	public void countryRanking(Connection connection, int olympic_id){
 	// Works
 		// all participanting countries (abbrevation)
 		// first year the country participated in the olympics
@@ -802,7 +806,7 @@ public class Olympic
 	    }
 	}
 
-	public static void topkAthletes(Connection connection, int olympic_id, int k){
+	public void topkAthletes(Connection connection, int olympic_id, int k){
 	// WORKS
 		
     	try{
@@ -854,7 +858,7 @@ public class Olympic
 	    }
 	}
 
-	public static void connectedAthletes(Connection connection, int participant_id, int olympic_id, int n){
+	public void connectedAthletes(Connection connection, int participant_id, int olympic_id, int n){
 	// TO DO
 		try{
 			connection.setAutoCommit(false);
@@ -875,17 +879,179 @@ public class Olympic
 
 	}
 
-	public static void logout(Connection connection){
+	public void logout(Connection connection){
 	// Works
+		System.out.println("The current user has been logged out.");
 		currentUser = null;
 		currentRole = 0;
 		loggedIn = false;
 
 	}
 
-	public static void exit(){
+	public void exit(){
 	// Works
+		System.out.println("Exitting...");
 		cont = false;
 		System.exit(0);
 	}
+
+// HELPER FUNCTIONS
+	public static String[] helperCreateUser(){
+
+		String[] user_info = new String[3];
+
+		user_info[0] = "test_user";		// String user
+		user_info[1] = "test_pass";		// String passkey 
+		user_info[2] = "1";				// int role_id
+
+		return user_info;
+	}
+
+	public static String helperDropUser(){
+
+		String user = "test_delete";	// String user
+
+		return user;
+	}
+
+	public static String[] helperCreateEvent(){
+
+		String[] event_info = new String[4];
+
+		event_info[0] = "1";			// int sport_id
+		event_info[1] = "1";			// int venue_id
+		event_info[2] = "2004-08-16";	// date event_time
+		event_info[3] = "M";			// char gender
+
+		return event_info;
+	}
+
+	public static String[] helperAddEventOutcome(){
+
+		String[] event_info = new String[6];
+		
+		event_info[0] = "Athens"; 	// String olympic_city 
+		event_info[1] = "2004"; 	// String olympic_year
+		event_info[2] = "61";		// int team_id
+		event_info[3] = "1";		// int event_id
+		event_info[4] = "70";		// int participant_id
+		event_info[5] = "7";		// int position
+
+		return event_info;
+	}
+
+	public static String[] helperCreateTeam(){
+
+		String[] team_info = new String[6];
+		
+		team_info[0] = "Athens";		// String olympic_city
+		team_info[1] = "2004";			// String olympic_year
+		team_info[2] = "1";		// int sport_id
+		team_info[3] = "17";		// int country_id
+		team_info[4] = "test_team";		// String team_name
+		team_info[5] = "1";		// int coach_id
+
+		return team_info;
+	}
+
+	public static int[] helperRegisterTeam(){
+		
+		int[] team_info = new int[2];
+	
+		team_info[0] = 61;		// int team_id
+		team_info[1] = 24;		// int event_id
+
+		return team_info;
+	}
+
+	public static String[] helperAddParticipant(){
+
+		String[] participant_info = new String[5];
+
+		participant_info[0] = "test_fname";	// String fname
+		participant_info[1] = "test_lname";	// String lname
+		participant_info[2] = "test_nat";	// String nationality
+		participant_info[3] = "test_bp";	// String birth_place
+		participant_info[4] = "1990-01-01";	// Date dob
+
+		return participant_info;
+	}
+
+	public static int[] helperAddTeamMember(){
+		
+		int[] team_info = new int[2];
+
+		team_info[0] = 1;		// int team_id
+		team_info[1] = 70;		// int participant_id
+
+		return team_info;
+	}
+
+	public static int helperDropTeamMember(){
+		
+		int participant_id = 100;// int participant_id
+
+		return participant_id;
+	}
+
+	public static String[] helperLogin(){
+		
+		String[] login_info = new String[2];
+
+		login_info[0] = "o1";		// String username
+		login_info[1] = "pass";		// String passkey
+
+		return login_info;
+	}
+
+	public static String helperDisplaySport(){
+		
+		String sport_name = "Volleyball";	// String sport_name
+
+		return sport_name;
+	}
+
+	public static String[] helperDisplayEvent(){
+		
+		String[] event_info = new String[3];
+
+		event_info[0] = "Athens";		// String olympic_city
+		event_info[1] = "2004";			// String olympic_year
+		event_info[2] = "21";			// int event_id
+
+		return event_info;
+	}
+
+	public static int helperCountryRanking(){
+		
+		int olympic_id = 1;// int olympic_id
+
+		return olympic_id;
+	}
+
+	public static int[] helperTopKAthletes(){
+		
+		int[] athlete_info = new int[2];
+
+		athlete_info[0] = 1;// int olympic_id
+		athlete_info[1] = 5;// int k
+
+		return athlete_info;
+	}
+
+	public static int[] helperConnectedAthletes(){
+		
+		int[] athlete_info = new int[3];
+
+		athlete_info[0] = 1;		// int participant_id
+		athlete_info[1] = 1;		/// int olympic_id
+		athlete_info[2] = 1;		/// int n
+
+		return athlete_info;
+	}
+
+	public static void helperLogout(){
+
+	}
+
 }

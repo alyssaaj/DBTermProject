@@ -31,6 +31,8 @@ INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) value
 INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'c1', 'pass', 2, sysdate);
 INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'c2', 'pass', 2, sysdate);
 INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'g1', 'GUEST', 3, sysdate);
+INSERT INTO USER_ACCOUNT (user_id, username, passkey, role_id, last_login) values(SEQ_USER_ACCOUNT.NEXTVAL, 'test_delete', 'pass', 2, sysdate);
+
 -- OLUMPICS DONE
 CREATE SEQUENCE SEQ_OLYMPICS START WITH 1 INCREMENT BY 1;
 INSERT INTO OLYMPICS values(SEQ_OLYMPICS.NEXTVAL, 'XXV', 'Athens', '13-AUG-2004', '29-AUG-2004', 'https://www.olympic.org/athens-2004');
