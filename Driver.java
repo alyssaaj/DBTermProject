@@ -4,7 +4,7 @@
 
 
 // Compile: javac -cp ojdbc7.jar Olympic.java Driver.java
-// Execute: java -cp ojdbc7.jar:. Olympic Driver
+// Execute: java -cp ojdbc7.jar:. Driver
 
 import java.util.*;
 import java.io.*;

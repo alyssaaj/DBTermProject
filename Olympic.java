@@ -859,7 +859,7 @@ public class Olympic
 	}
 
 	public void connectedAthletes(Connection connection, int participant_id, int olympic_id, int n){
-	// TO DO
+	// 
 		try{
 			connection.setAutoCommit(false);
             PreparedStatement stmt = connection.prepareStatement("");
